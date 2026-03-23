@@ -5,17 +5,36 @@ require_once __DIR__ . '/bootstrap.php';
 use Yangpimpollo\Crud\model\User;
 use Yangpimpollo\Crud\Prueba;
 use Yangpimpollo\Crud\controller\UserController;
-$controller = new UserController();
+
 $action = $_GET['action'];
 
 switch ($action) {
-    case 'create':
+    case 'go_create':
         require 'src/view/Create.php'; 
         break;
 
-    case 'login':
-        require 'src/view/Welcome.php'; 
+    case 'go_login':
+        require 'src/view/Login.php'; 
         break;
+
+    case 'create':
+        echo "Creando usuario...";
+        $controller = new UserController();
+        if($controller->handleRequest()){
+          require 'src/view/Welcome.php'; 
+        }else{
+            require 'src/view/Error404.php'; 
+        }
+        break;  
+    case 'login':
+        echo "Iniciando sesión...";
+        $controller = new UserController();
+        if($controller->login()){
+          require 'src/view/Welcome.php'; 
+        }else{
+            require 'src/view/Error404.php'; 
+        }
+        break; 
 
     default:
         require 'src/view/Home.php'; 

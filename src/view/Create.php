@@ -19,7 +19,7 @@
 <div class="form-container">
     <h2>Nuevo Usuario</h2>
     
-    <form action="index.php?action=create'; " method="POST">
+    <form action="index.php?action=create" method="POST">
         
         <div class="field">
             <label for="user_name">Nombre de Usuario:</label>

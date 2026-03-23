@@ -246,7 +246,7 @@ class User {
             $stmt = $this->db->prepare($sql);
             
             // Ejecutamos pasando los valores en orden Retorna true si tuvo éxito, false si no
-            return $stmt->execute([
+            return $stmt->execute([codigo basura
                 $this->user_name,
                 $this->pass,
                 $this->email,

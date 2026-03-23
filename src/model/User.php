@@ -43,6 +43,27 @@ class User {
             return false;
         }       
     }
+
+    public function login($data) {
+        $this->user_name = $data['user_name'];
+        $this->pass = $data['pass'];
+
+        try {
+            $sql = "SELECT * FROM usuarios WHERE user_name = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$this->user_name]);
+            $user = $stmt->fetch();
+
+            if ($user && password_verify($this->pass, $user['pass'])) {
+                // Aquí podrías iniciar sesión, por ejemplo, guardando datos en $_SESSION
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
 
 ?>
