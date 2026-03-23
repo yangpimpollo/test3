@@ -15,6 +15,7 @@ class User {
 
     public function __construct() {
         $this->db = Connection::getInstance();
+        echo "dentro de user constructor";
     }
 
     // public function getId() { return $this->id; }

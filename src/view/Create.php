@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; }
+        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 200px; }
         .form-container { border: 1px solid #ccc; padding: 20px; border-radius: 8px; width: 300px; }
         .field { margin-bottom: 15px; }
         label { display: block; margin-bottom: 5px; }
@@ -19,7 +19,7 @@
 <div class="form-container">
     <h2>Nuevo Usuario</h2>
     
-    <form action="src/controller/UserController.php" method="POST">
+    <form action="index.php?action=create'; " method="POST">
         
         <div class="field">
             <label for="user_name">Nombre de Usuario:</label>
