@@ -15,7 +15,12 @@ git commit -m "Mi primer commit"
 git branch -M main
 git remote add origin https://github.com/yangpimpollo/test3.git
 git push -u origin main
+
+git clone git@github.com:yangpimpollo/test3.git
 ```
+8. al clonar de gitHub tener en cuenta que ya no se tendra el archivo `.env` ni `vendor`, la primera se crea manualmente y el otro 
+ ejecutamos `composer install` buscara el archivo composer.lock e instala las versiones exactas de las librerías.
+
 
 ## Ejercicio 2 - conectar con postgresql
 1. activamos la BD desde la consola `sudo service postgresql start`
@@ -203,9 +208,78 @@ use Yangpimpollo\Crud\database\Connection;
 $db = Connection::getInstance();
 ```
 
+## Ejercicio 8 - Diagrama de Flujo del Modelo 
+La arquitectura que aplicaremos es Model–view–controller (MVC) donde tendra las siguientes capas:
+usuario-->vista-->enrutador-->controlador-->modelo-->base datos
 
+- solo modelo puede conectarse a la BD tiene una instancia de ella pero no conoce controlador
+- el controlador instancia a modelo pero no conoce a la BD su funcion principal es transportar info 
 
+## Ejercicio 9 - Modelo de Usuario
+Creamos `User.php` en src/model este se encargara de toda la logica recibira array de datos del controlador 
+se encargara de guardarlo o autenticarlo en la BD
+```php
+<?php
 
+namespace Yangpimpollo\Crud\model;
+
+use Yangpimpollo\Crud\database\Connection;
+use PDOException;
+
+class User {
+    private $id;
+    private $user_name;
+    private $pass;
+    private $email;
+    private $role = 'user';
+    private $db;
+
+    public function __construct() { $this->db = Connection::getInstance();}
+
+    public function register($data) {
+        $this->user_name = $data['user_name'];
+        $this->pass = password_hash($data['pass'], PASSWORD_DEFAULT);
+        $this->email = $data['email'];
+
+        try {
+            $sql = "INSERT INTO usuarios (user_name, pass, email, role) VALUES (?, ?, ?, ?)";
+            $stmt = $this->db->prepare($sql);
+            
+            // Ejecutamos pasando los valores en orden Retorna true si tuvo éxito, false si no
+            return $stmt->execute([
+                $this->user_name,
+                $this->pass,
+                $this->email,
+                $this->role
+            ]);
+        } catch (PDOException $e) {
+            return false;
+        }       
+    }
+}
+```
+lo probamos en index
+
+```php
+<?php
+
+    require_once __DIR__ . '/bootstrap.php';
+
+    use Yangpimpollo\Crud\model\User;
+    $us1 = new User();
+    $data = [
+        'user_name' => 'maria123',
+        'pass' => '123456',
+        'email' => 'maria123@ejemplo.com'
+    ];  
+    $result = $us1->register($data);
+    if ($result) {
+        echo "Usuario registrado exitosamente.";
+    } else {
+        echo "Error al registrar el usuario.";
+    }
+```
+saldra *Usuario registrado exitosamente.* lo podemos ver en DBeaver
 
 
 
