@@ -7,6 +7,15 @@
 4. lanzamos el servidor en la carpeta test1 `php -S localhost:8000`
 5. visualizamos en la web `http://localhost:8000` 
 6. tambien podemos ejecutar en consola `php index.php` para ver en consola
+7. subimos a gitHub
+```bash
+git init
+git add .
+git commit -m "Mi primer commit"
+git branch -M main
+git remote add origin https://github.com/yangpimpollo/test3.git
+git push -u origin main
+```
 
 ## Ejercicio 2 - conectar con postgresql
 1. activamos la BD desde la consola `sudo service postgresql start`

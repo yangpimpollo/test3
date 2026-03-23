@@ -9,6 +9,7 @@ require_once __DIR__ . '/bootstrap.php';
 // $test = new Prueba();
 // echo $test->saludar();
 
-    require 'src/view/Login.php';
+    //require 'src/view/Login.php';
+    require 'src/view/Create.php';
 
 ?>
