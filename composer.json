@@ -1,0 +1,21 @@
+{
+    "name": "yangpimpollo/crud",
+    "description": "learn_php! T_T",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Yangpimpollo\\Crud\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yangpimpollo",
+            "email": "lionpimpollo18@gmail.com"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
